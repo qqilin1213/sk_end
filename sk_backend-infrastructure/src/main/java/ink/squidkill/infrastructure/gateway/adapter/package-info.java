@@ -1,0 +1,1 @@
+package ink.squidkill.infrastructure.gateway.adapter;

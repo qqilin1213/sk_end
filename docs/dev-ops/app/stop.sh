@@ -1,0 +1,1 @@
+docker stop sk_backend

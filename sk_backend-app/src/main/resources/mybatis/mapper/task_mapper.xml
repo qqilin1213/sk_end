@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ink.squidkill.infrastructure.persistent.dao.ITaskDao">
+
+    <resultMap id="dataMap" type="ink.squidkill.infrastructure.persistent.po.Task">
+        <id property="id" column="id"/>
+        <result property="taskId" column="task_id"/>
+        <result property="type" column="type"/>
+        <result property="subType" column="sub_type"/>
+        <result property="level" column="level"/>
+        <result property="title" column="title"/>
+        <result property="subTitle" column="sub_title"/>
+        <result property="createName" column="create_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+
+    <select id="queryTasksByType" resultMap="dataMap">
+        SELECT *
+        FROM task
+        <if test="types != null and types.size() > 0">
+            WHERE type IN
+            <foreach item="type" index="index" collection="types" open="(" separator="," close=")">
+                #{type}
+            </foreach>
+        </if>
+    </select>
+
+
+    <select id="queryTaskById" parameterType="java.lang.String" resultMap="dataMap">
+        SELECT *
+        FROM task
+        <if test="taskId != null and taskId != ''">
+            where task_id = #{taskId}
+        </if>
+    </select>
+
+
+</mapper>

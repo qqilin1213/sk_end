@@ -1,0 +1,6 @@
+spring:
+  config:
+    name: sk_backend-app
+  profiles:
+    active: prod
+#dev prod]
